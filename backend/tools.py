@@ -2,7 +2,7 @@
 tools.py
 
 Data retrieval tools for the infrastructure query agent.
-These do the actual work — query DuckDB over Parquet files.
+These do the actual work  -  query DuckDB over Parquet files.
 
 Keeping this layer separate from the agent means:
   - Easy to test independently
@@ -49,7 +49,7 @@ class InfraQueryTools:
     def _register_tables(self):
         """
         Register Parquet files as virtual tables in DuckDB.
-        Lazy loading — DuckDB only reads what the query needs.
+        Lazy loading  -  DuckDB only reads what the query needs.
         """
         import os
         tables = {
@@ -62,7 +62,7 @@ class InfraQueryTools:
                 self._con.execute(f"CREATE VIEW {tbl} AS SELECT * FROM read_parquet('{path}')")
                 logger.info(f"Registered table '{tbl}' from {path}")
             else:
-                logger.warning(f"Data file not found: {path} — queries on {tbl} will fail")
+                logger.warning(f"Data file not found: {path}  -  queries on {tbl} will fail")
 
     def _parse_scope(self, scope: str) -> tuple[str, str]:
         """
@@ -231,7 +231,7 @@ class InfraQueryTools:
     def resolve_time_reference(self, reference: str) -> QueryResult:
         """
         Convert relative time references to ISO timestamps.
-        This runs locally — no LLM needed for this.
+        This runs locally  -  no LLM needed for this.
 
         Handles the most common cases. For anything complex,
         just ask the user to specify the time range directly.

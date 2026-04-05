@@ -4,11 +4,11 @@ api.py
 FastAPI backend for the infra chat dashboard.
 
 Endpoints:
-  POST /query       — submit a natural language query, get a response
-  GET  /health      — liveness check
-  GET  /metrics     — quick summary of current facility state
+  POST /query        -  submit a natural language query, get a response
+  GET  /health       -  liveness check
+  GET  /metrics      -  quick summary of current facility state
 
-Streaming via SSE for the query endpoint — lets the frontend show
+Streaming via SSE for the query endpoint  -  lets the frontend show
 the response as it's generated rather than waiting for the full thing.
 Makes it feel much more responsive.
 """
@@ -28,7 +28,7 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI(title="Infra Chat API", version="0.1.0")
 
-# CORS — wide open for dev, lock this down before any real deployment
+# CORS  -  wide open for dev, lock this down before any real deployment
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -72,7 +72,7 @@ def query(req: QueryRequest):
 @app.get("/metrics/summary")
 def metrics_summary():
     """
-    Quick facility summary — used by the dashboard header cards.
+    Quick facility summary  -  used by the dashboard header cards.
     Returns current state without needing a natural language query.
     """
     from .tools import InfraQueryTools

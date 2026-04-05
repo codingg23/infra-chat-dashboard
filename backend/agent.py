@@ -25,7 +25,7 @@ from .tools import InfraQueryTools, QueryResult
 logger = logging.getLogger(__name__)
 
 # The system prompt defines the assistant's role and constraints.
-# Keeping it concise — too much in the system prompt and the model
+# Keeping it concise  -  too much in the system prompt and the model
 # starts ignoring parts of it.
 SYSTEM_PROMPT = """You are an infrastructure operations assistant for a data centre.
 You help engineers query and understand power, thermal, and operational metrics.
@@ -34,7 +34,7 @@ When answering queries:
 - Always use the available tools to retrieve real data
 - Present numbers with appropriate units and context
 - Flag anomalies or values approaching thresholds (e.g. ASHRAE limits)
-- Be concise — operators are busy, they want the answer fast
+- Be concise  -  operators are busy, they want the answer fast
 - If something looks concerning, say so directly
 
 You have access to tools that query real telemetry data. Use them.
@@ -105,10 +105,10 @@ class InfraAgent:
     """
     Orchestrates the query understanding → data retrieval → response synthesis pipeline.
 
-    Stateless per query for now — no session memory. That's a TODO.
+    Stateless per query for now  -  no session memory. That's a TODO.
     """
 
-    def __init__(self, data_path: str, model: str = "claude-3-5-sonnet-20241022"):
+    def __init__(self, data_path: str, model: str = "claude-3-5-sonnet-20240620"):
         self.client = anthropic.Anthropic()
         self.model = model
         self.query_tools = InfraQueryTools(data_path)
@@ -154,7 +154,7 @@ class InfraAgent:
             logger.debug(f"Round {round_num + 1}: stop_reason={response.stop_reason}")
 
             if response.stop_reason == "end_turn":
-                # Claude is done — extract the text response
+                # Claude is done  -  extract the text response
                 text_blocks = [b.text for b in response.content if hasattr(b, "text")]
                 return "\n".join(text_blocks)
 
