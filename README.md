@@ -93,14 +93,14 @@ To generate test data to query against, run the synthetic-infra-datasets generat
 
 The hardest part was entity resolution, not the LLM bit. Operators say things like "the hot row" or "that rack near the broken CRAC" and you need to map that to R07-12. The system currently asks for clarification when it can't resolve an entity, which is annoying. Probably need a proper entity index that operators can add aliases to.
 
-Keeping the LLM out of the data path has been worth the extra complexity. Early versions had the model writing SQL directly, which worked okay but occasionally gave plausible-looking wrong answers. Tool-based approach means everything is auditable.
+Keeping the LLM out of the data path has been worth the extra complexity. Early versions had the model writing SQL directly, which worked okay but occasionally gave plausible-looking wrong answers. Tool based approach means everything is auditable.
 
-Latency is around 800ms median end-to-end. Fine for a prototype, would need caching before this could handle real query volume.
+Latency is around 800ms median end to end. Fine for a prototype, would need caching before this could handle real query volume.
 
 ## Known Gaps
 
 - No auth - this is a prototype
-- Data source is file-based only, no live DCIM integration
+- Data source is file based only, no live DCIM integration
 - Entity resolution is basic (exact match + fuzzy fallback)
 - No session memory, each query is independent
 - Frontend needs a lot of work
